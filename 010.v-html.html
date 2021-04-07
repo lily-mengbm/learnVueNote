@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-html</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{url}}</h2>
+  <h2 v-html="url"></h2>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 在某些情况下，我们从服务器请求的数据本身就是一个HTML代码
+  * 如果我们直接通过{{}}来输出，会将HTML代码也一起输出
+  * 但是我们可能希望的是按照HTML格式进行解析，并且显示对应的内容
+  * v-html指令：
+  * 该指令后面往往会跟一个字符串类型
+  * 会将String的html解析出来并且进行渲染
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template",
+      url: '<a href="http://www.baidu.com">百度一下</a>'
+    }
+  })
+</script>
+</body>
+</html>

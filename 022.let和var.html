@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>let和var</title>
+</head>
+<body>
+  <button>按钮1</button>
+  <button>按钮2</button>
+  <button>按钮3</button>
+  <button>按钮4</button>
+  <button>按钮5</button>
+<script>
+  /*
+  * let/var
+  * 实际上，var的设计可以看成JavaScript语言设计上的错误，
+  * 但是这种错误多半不能修复和移除，因为需要向后兼容
+  * 大概十年前，Brendan Eich(JS的作者)就决定修复这个问题，于是他添加了一个新的关键字：let
+  * 我们可以将let看成更完美的var
+  *
+  * 变量作用域：变量作用的范围
+  * 块级作用域：JS中使用var来声明一个变量时，变量的作用域主要是和函数的定义有关
+  * 针对于其他块定义来说是没有作用域的，比如if/for，这在开发中往往会引起一些问题
+  *
+  *
+  * */
+  {
+    var name = "wll";
+    console.log(name);//wll
+  }
+  console.log(name);//wll
+  /*
+  * 没有块级作用域引起的问题：
+  * 任何位置都可以将if内部定义的变量值改变，当调用引用了该值的内部函数时，得不到想要的结果
+  * */
+  var func;
+  if(true){
+    var name = "code";
+    func = function () {
+      console.log(name);//Alen
+    }
+  }
+  name = 'Alen';
+  func();
+  console.log(name);//Alen
+
+
+  /*
+  * 在下面这个for循环中，当点击事件执行的时候，for循环已经结束了，打印的i始终是5
+  * 闭包可以解决这个问题，因为函数是一个作用域
+  * 在ES5之前因为if和for都没有块级作用域的概念，
+  * 很多时候我们必须借助function的作用域来解决应用外部变量的问题
+  * ES6中加入了let，let是有if和for的块级作用域
+  * */
+
+  //ES5
+  var btns = document.getElementsByTagName("button");
+  for(var i=0; i<btns.length; i++){
+    btns[i].addEventListener('click', function(){
+      console.log("第" + i + "个按钮被点击了")
+    })
+  }
+  //ES5中使用闭包
+  for(var j=0; j<btns.length; j++){
+    (function (j) {
+      btns[j].addEventListener('click', function(){
+        console.log("第" + j + "个按钮被点击了")
+      })
+    })(j)
+  }
+
+  //ES6有作用域
+  const btns2 = document.getElementsByTagName("button");
+  for(let i=0; i<btns2.length; i++){
+    btns2[i].addEventListener('click', function () {
+      console.log("第" + i + "个按钮被点击了")
+    })
+  }
+
+</script>
+</body>
+</html>

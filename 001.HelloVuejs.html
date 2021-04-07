@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HelloVuejs</title>
+
+</head>
+<body>
+  <div id="app">{{message}}
+    <h2>{{name}}</h2>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+    /*
+    * 第一个vue程序
+    * 1.创建一个Vue对象
+    * 2.传入一些option：{}
+    *   el属性：该属性决定了这个Vue对象挂在到哪一个元素上
+    *   data属性：该属性中通常会用来存储一些数据
+    *
+    * */
+   const app = new Vue({
+     el:'#app',
+     data:{
+       message: 'hello vue',
+       name: 'Lily'
+     }
+
+   })
+  </script>
+</body>
+</html>

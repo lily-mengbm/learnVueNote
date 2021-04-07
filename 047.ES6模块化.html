@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ES6模块化</title>
+  <script>
+    /*
+    * ES6
+    * 实现（浏览器端）：使用Babel将ES6编译为ES5，使用Browserify编译打包js
+    * export（导出）：
+    * 1.导出{}中定义的变量
+    * let name = 'wll'
+    * let age = 24
+    * let gender = 'female'
+    * export {name, age, gender}
+    * 2.直接导出export定义的变量
+    * export let num = 1000
+    * 3.导出函数
+    * export function(num1, num2){
+    *   return num1 * num2
+    * }
+    * 4.导出类
+    * export class Person{
+    *   run(){
+    *   console.log('run')
+    *   }
+    * }
+    * 5.export default
+    * 在某些情况下，一个模块包含某个功能，我们并不希望给这个功能命名，而是让导入者自己来命名
+    * export default function(){  //info.js
+    *   console.log('default function');
+    * }
+    * 这里的myFunc就可以自己命名
+    * import myFunc from './info.js'
+    * 注意：export default 在一个模块中，不允许同时存在多个
+    *
+    * import(导入)：
+    * 首先，我们需要在HTML代码中引入js文件，并且类型设置为module
+    * <script type='module'>
+    * import {name, age, gender} from './info.js'
+    * console.log(name, age, gender)
+    * 通过*可以导入模块中所有的export变量
+    * import * as info from './info.js'
+    * console.log(info.name, info.age, info.gender)
+    *
+    *
+    * */
+  </script>
+</head>
+<body>
+
+</body>
+</html>

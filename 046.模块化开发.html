@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模块化开发</title>
+  <script>
+    /*
+    * javascript原始功能：
+    * 在网页开发的早期，js作为一种脚本语言，做一些简单的表单验证或动画实现等，
+    * 此时代码还是很少的，直接将代码写在<script>标签中即可
+    * 随着ajax异步请求的出现，慢慢形成了前后端分离
+    * 客户端需要做的事情越来越多，代码量与日俱增，
+    * 为了应对代码量的剧增，我们通常会将代码组织在多个js文件中，进行维护
+    * 但是这种维护方式，依然不能避免一些灾难性的问题
+    * 比如全局变量重名问题：
+    * 在aaa.js文件中，小明定义了一个变量flag且值为true，
+    * 在bbb.js文件中，小红也定义了变量false且值为false
+    * 在main.js文件中，小明希望通过flag进行一些判断，完成后续事情，却发现代码不能正确运行
+    *
+    * 另外，这种代码的编写方式对js文件的依赖顺序几乎是强制性的
+    *
+    * 匿名函数的解决方案：
+    * 可以使用匿名函数来解决重名问题
+    * 但是匿名函数没有解决代码复用性问题
+    *
+    * 使用模块作为出口：
+    * 我们可以将需要暴露到外部的变量，使用一个模块作为出口
+    * 在匿名函数内部定义一个变量
+    * 最后将这个变量返回，并且在外部使用一个moduleA接收
+    * 这就是模块最基本的封装
+    *
+    * 常见的模块化规范：
+    * CommonJS、AMD、CMD、ES6的Modules
+    *
+    * */
+    var moduleA = (function(){
+      //定义一个对象
+      var obj = {};
+      //在对象内部添加变量和方法
+      obj.falg = true;
+      obj.myFun = function (info) {
+        console.log(info);
+      };
+      //将对象返回
+      return obj;
+    })()
+
+    /*CommonJS（nodejs就是commonjs规范的实现）：
+    * 导出语法：
+    * exports本来就是一个空对象，暴露的本质就是exports对象
+    * module.exports = {
+    *   flag: true,
+    *   test(a, b){
+    *     return a + b
+    *   },
+    *   demo(a, b){
+    *     return a * b
+    *   }
+    * }
+    *
+    * 导入语法（对象解构赋值语法）：
+    * let {test, demo, flag} = require('moduleA')
+    * require后面括号中的内容，
+    *   当引入第三方模块时：写模块名
+    *   当导入自定义模块时：写模块文件路径
+    * */
+
+    /*
+    * AMD（Asynchronous Module Definition）
+    * 专门用于浏览器端，模块的加载是异步的
+    * 基本语法：
+    * 1.定义没有依赖的模块
+    * define(function(){
+    *   return 模块
+    * })
+    * 2.定义没有依赖的模块
+    * define(['module1', 'module2'], function(m1, m2){
+    *   return 模块
+    * })
+    * 3.引入使用模块（主模块）
+    * require(['module1', 'module2'], function(m1. m2){
+    *   使用m1/m2
+    * })
+    * 4.实现（浏览器端）：require.js
+    * 5.相关文档：官网/阮一峰博客
+    *
+    * */
+
+    /*
+    * CMD（Common Module Definition 通用模块定义）
+    * 用于浏览器端，模块的加载是异步的，模块使用时才会加载执行
+    * 实现：sea.js（停止维护）
+    * */
+  </script>
+</head>
+<body>
+
+</body>
+</html>

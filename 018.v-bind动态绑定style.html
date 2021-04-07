@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind</title>
+</head>
+<body>
+<div id="app">
+  <h2 :style="{'font-size':'50px'}">{{message}}</h2>
+  <h2 :style="{'font-size':finalSize, color: finalColor}">{{message}}</h2>
+  <h2 :style="[baseStyle, themeStyle]">{{message}}</h2>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 我们可以利用v-bind来绑定一些CSS的内联样式
+  * 在写CSS属性的时候，可以使用驼峰式或者短横线分隔（单引号括起来）
+  * 例如：fontSize 'font-size'
+  * 对象语法： :style="{key: value, key: value}"
+  *           key:CSS样式，value:String | data中定义的变量
+  * 数组语法： :style="[baseStyle, themeStyle]"
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template",
+      finalSize: '100px',
+      finalColor: 'red',
+      baseStyle: {
+        color: "pink",
+      },
+      themeStyle: {
+        fontsize: "10px"
+      }
+    }
+  })
+</script>
+</body>
+</html>

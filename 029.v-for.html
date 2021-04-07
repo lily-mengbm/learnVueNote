@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-for</title>
+</head>
+<body>
+<div id="app">
+  <!-- 遍历数组-->
+  <ul>
+    <li v-for="movie in movies">{{movie}}</li>
+  </ul>
+  <ul>
+    <li v-for="(movie, index) in movies">{{index + 1}}.{{movie}}</li>
+  </ul>
+  <!-- 遍历对象-->
+  <ul>
+    <li v-for="item in info">{{item}}</li>
+  </ul>
+  <ul>
+    <li v-for="(value, key) in info">{{key}}:{{value}}</li>
+  </ul>
+  <ul>
+    <li v-for="(value, key, index) in info">{{index}}.{{key}}:{{value}}</li>
+  </ul>
+
+  <ul>
+    <li v-for="item in letters" :key="item">{{item}}</li>
+    数组渲染之后在中间插入元素的渲染过程<br/>
+    <img src="imgs/pic.png"/>
+  </ul>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 当我们有一组数据需要渲染的时候，可以使用v-for来完成
+  * v-for的语法类似于JavaScript中的for循环
+  * 格式： item in items
+  * 如果在遍历中不需要使用索引值： v-for="item in items"
+  * 如果在遍历中不需要使用索引值： v-for="(item, index) in items"
+  *
+  * 在遍历对象的过程中，如果只获取一个值，获取到的是value（属性值）
+  *
+  * 官方推荐我们使用v-for的时候，给对应的元素或组件添加上：key属性
+  * 作用：为了更高效的更新虚拟DOM
+  * 主要原理：Vue虚拟DOM的Diff算法
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      movies: ["夏目友人帐", "一拳超人", "山河令", "阿凡达", "哪吒"],
+      info: {
+        name: "wll",
+        age: 24,
+        gender: "female"
+      },
+      letters: ['A', 'B', 'C', 'D']
+    }
+  })
+</script>
+</body>
+</html>

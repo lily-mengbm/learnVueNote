@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS高阶函数</title>
+  <script>
+    let arr = [10, 42, 53, 48, 95];
+    //普通的for循环
+    for(let i=0; i<arr.length; i++){
+      console.log(i);//0 1 2 3 4
+      console.log(arr[i]);//10, 42, 53, 48, 95
+    }
+    //let i in arr
+    for(let i in arr){
+      console.log(i);//0 1 2 3 4
+      console.log(arr[i]);//10, 42, 53, 48, 95
+    }
+    //let i of arr
+    for(let i of arr){
+      console.log(i);//10, 42, 53, 48, 95
+    }
+
+    /*
+    * 编程范式：命令式编程/声明式编程
+    * 编程范式：面向对象编程（第一公民：对象）/函数式编程（第一公民：函数）
+    * */
+    //取出所有小于100的数字
+    const nums = [109, 89, 23, 199, 34, 2];
+    let newNums1 = [];
+    for(let i of nums){
+      if(i < 100){
+        newNums1.push(i)
+      }
+    }
+    //将所有小于100的数字乘以2
+    let newNum2 = [];
+    for(let i of newNums1){
+      newNum2.push(i * 2)
+    }
+    console.log(newNum2);
+    //输出newNum2所有数字相加的结果
+    let total = 0;
+    for(let i of newNums1){
+      total += i;
+    }
+    console.log(total);
+
+    /*
+    * filter中第一个参数是一个回调函数
+    * 该回调函数每遍历一个元素就会执行一次，
+    * 该回调函数的参数就是每次遍历得到的值，即arr中的每个值（n）
+    * 且该回调函数必须返回一个布尔值
+    * 当返回true时，函数内部会自动将这次回调的n加入到新的数组中
+    * 当返回false时，函数内部会自动过滤到这次的n
+    * */
+    let newNums3 =  nums.filter(function(n){
+      return n > 100
+    });
+    console.log(newNums3);//109 199
+
+    /*
+    * map函数
+    * */
+    newNums3 = newNums3.map(function (n) {
+      return n * 2
+    });
+    console.log(newNums3);//218 398
+
+    /*
+    * reduce函数：对数组中所有内容进行汇总
+    * 参数一：回调函数
+    *        preValue:上一次return的结果
+    *        n:每次遍历的值
+    *        第一次：preValue： 0 , n：218
+    *        第二次：preValue： 218 , n：398
+    * 参数二：0(初始化值)
+    *
+    * */
+    total = newNums3.reduce(function (preValue, n) {
+      return preValue + n
+    }, 0);
+    console.log(total);//616
+
+    //总结 取出数组中大于100的数字，将其乘以2，将这个新数组的和返回
+    total = nums.filter(function (n) {
+      return n > 100
+    }).map(function (n) {
+      return n * 2
+    }).reduce(function (preValue, n) {
+      return preValue + n
+    }, 0);
+    console.log(total);
+
+    nums.filter(n => n > 100).
+    //箭头函数写法
+    total = nums.filter(n => n > 100).map(n => n * 2).reduce((pre, n) => pre + n);
+    console.log(total);
+
+    let sum = 0;
+    for(let i=0; i<nums.length; i++){
+      if(nums[i] > 100){
+        sum += nums[i] * 2
+      }
+    }
+    console.log(sum);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

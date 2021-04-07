@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>注册组件语法糖写法</title>
+</head>
+<body>
+<div id="app">
+  <cpn1></cpn1>
+  <cpn2></cpn2>
+  <cpn3></cpn3>
+  <cpn4></cpn4>
+  <cpn5></cpn5>
+  <cpn5></cpn5>
+  <cpn5></cpn5>
+</div>
+<!-- 使用<script>标签-->
+<script type="text/x-template" id="cpn3">
+  <div>
+    <h2>我是script标签标题</h2>
+    <p>我是script标签内容</p>
+    <p>{{title}}</p>
+  </div>
+</script>
+<!-- 使用<template>标签-->
+<template id="cpn4">
+  <div>
+    <h2>我是template标题</h2>
+    <p>我是template内容</p>
+  </div>
+</template>
+<template id="calCpn">
+  <div>
+    <h2>当前计数： {{counter}}</h2>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </div>
+</template>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 在上面注册组件的方式，可能会有些繁琐，
+  * Vue为了简化这个过程，提供了注册的语法糖
+  * 主要是省去了调用Vue.extend()的步骤，而是直接使用一个对象来代替
+  *
+  * 模板的分离写法：Vue定义了两种方案来定义HTML模块内容
+  * 1.使用<script>标签
+  * 2.使用<template>标签
+  *
+  * Vue组件数据的存放
+  * Vue组件是不能访问到Vue根组件的data数据的，每个组件都有自己存放数据的位置
+  * 组件对象也有一个data属性（也可以有methods等属性）
+  * 这个data属性必须是一个函数，且返回一个对象，对象内部保存着数据
+  *
+  * 为什么组件中的data必须是函数？
+  * 为了保证组件在复用的时候，每次引用的data都是属于自己的data，不会相互影响，
+  * 因为每次return回来的对象都是不同的对象
+  * */
+  //全局注册组件
+  Vue.component('cpn1', {
+    template: `
+      <div>
+        <h2>我是全局组件标题</h2>
+        <p></p>
+      </div>
+    `
+  });
+  Vue.component('cpn3', {
+    template: '#cpn3',
+    data(){
+      return {
+        title: 'abc'
+      }
+    }
+  });
+  Vue.component('cpn4', {
+    template: '#cpn4'
+  });
+  //将计数器功能封装成组件
+  Vue.component('cpn5', {
+    template: '#calCpn',
+    data(){
+      return {
+        counter: 0
+      }
+    },
+    methods: {
+      increment(){
+        this.counter++
+      },
+      decrement(){
+        this.counter--
+      }
+    }
+  });
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template"
+    },
+    //注册局部组件
+    components: {
+      'cpn2': {
+        template: `
+          <div>
+            <h2>我是局部组件标题</h2>
+            <p></p>
+          </div>
+        `
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件化</title>
+</head>
+<body>
+<div id="app">
+  <!-- 使用组件-->
+  <my-cpn></my-cpn>
+  <cpn2></cpn2>
+</div>
+<div id="app2">
+  <my-cpn></my-cpn>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * Vue组件化开发步骤：
+  * 1.创建组件构造器对象 Vue.extent()
+  *   调用Vue.extend()创建的是一个组件构造器
+  *   通常在创建组件构造器时，传入template代表我们自定义组件的模板
+  *   该模板就是在使用到组件的地方，要显示的HTML代码
+  *   事实上这种写法在Vue2.x的文档中几乎已经没有了，它会直姐使用语法糖，
+  *   但是在很多资料中还是会提到这种方式，而且这种方式是学习后面方式的基础
+  * 2.注册组件（全局组件） Vue.component('my-cpn', cpnC)
+  *   调用Vue.component()是将刚才的组件构造器注册为一个组件，并且给它起一个组件的标签名称
+  *   需要两个参数：注册组件的标签名、组件构造器
+  * 3.使用组件
+  *
+  * 全局组件：可以在多个Vue的实例中使用
+  * 局部组件：只能在注册组件的Vue实例中使用
+  * */
+
+  //创建组件构造器对象
+  const cpnC = Vue.extend({
+    template: `
+      <div>
+        <h2>我是标题</h2>
+          <p>我是内容1</p>
+          <p>我是内容2</p>
+          <p>我是内容3</p>
+          <p>我是内容4</p>
+      </div>`
+  });
+  const cpnC2 = Vue.extend({
+    template: `<h2>我是局部组件</h2>`
+  });
+  //注册全局组件
+  Vue.component('my-cpn', cpnC);
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template"
+    },
+    //注册局部组件
+    components: {
+      cpn2: cpnC2
+    }
+  });
+  const app2 = new Vue({
+    el: "#app2",
+  })
+</script>
+</body>
+</html>

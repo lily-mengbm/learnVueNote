@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>作用域插槽</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+  <cpn>
+    <!-- 获取子组件中的movies （Vue2.5以下需要使用template模板）-->
+    <template slot-scope="slot">
+      <span>{{slot.data.join('*')}}</span>
+    </template>
+  </cpn>
+  <cpn>
+    <template slot-scope="slot">
+      <span>{{slot.data.join('-')}}</span>
+    </template>
+  </cpn>
+</div>
+<template id="cpn">
+  <div>
+    <slot :data="movies ">
+      <ul>
+        <li v-for="item in movies">{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 作用域插槽：父组件替换插槽的标签，子组件提供插槽的内容
+  *
+  * 需求：
+  * 子组件中有一组数据： movies: ['阿凡达', '唐人街探案', '哪吒', '姜子牙', '你好李焕英', '八佰']
+  * 需要在多个页面展示：
+  * 在某些页面是以水平方向展示的，在某些页面是以列表形式展示，某些页面直接展示一个数组
+  *
+  * 在父组件中使用<template slot-scope="slot"></template>来获取子组件数据
+  * 在子组件中的插槽中使用 :data="movies" 来传递数据
+  *
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template"
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data(){
+          return {
+            movies: ['阿凡达', '唐人街探案', '哪吒', '姜子牙', '你好李焕英', '八佰']
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

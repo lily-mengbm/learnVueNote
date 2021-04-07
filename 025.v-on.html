@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-on</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{counter}}</h2>
+  <button v-on:click="increment">+</button>
+  <button v-on:click="decrement">-</button>
+  <button @click="decrement">+</button>
+  <button @click="decrement">-</button>
+  <br/><br/>
+  <button @click="btn1Click">按钮1</button>
+  <button @click="btn1Click()">按钮1</button>
+  <!--在事件定义时，写函数时省略了小括号，但是方法本身需要一个参数-->
+  <button @click="btn2Click">按钮2</button>
+  <button @click="btn2Click('wll')">按钮2</button>
+  <button @click="btn3Click('wll', $event)">按钮3</button>
+  <br/><br/>
+  <!--.stop修饰符的使用-->
+  <div @click="divClick">
+    <button @click.stop="btnClick">按钮</button>
+  </div>
+  <!-- .prevent修饰符的使用-->
+  <form action="baidu">
+    <input type="submit" value="提交" @click.prevent="submitClick"/>
+  </form>
+  <!-- 监听键盘按键的点击-->
+  <input type="text" @keyup.enter="keyUp"/>
+  <!-- .once修饰符的使用-->
+  <button @click.once="btn4Click">按钮</button>
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+  /*
+  * v-on：绑定事件监听器
+  * 缩写（语法糖）：@
+  * 参数：
+  * 1.如果该方法不需要额外参数，那么方法后面的（）可以不用添加（事件监听的时候）
+  * 2.如果函数需要参数，加上了（）但是没有传入参数，那么函数的形参为undefined
+  *   如果函数需要参数，省略了（）调用，那么函数的形参为event事件对象
+  * 3.如果需要同时传入某个参数，同时需要event时，可以通过$event传入事件
+  *
+  * v-on修饰符：
+  * 在某些情况下，我们拿到event的目的可能是进行一些事件处理
+  * Vue提供了修饰符来帮助我们方便的处理一些事件
+  * .stop -->调用event.stopPropagation()，阻止冒泡
+  * .prevent -->调用event.preventDefault()，阻止浏览器默认行为
+  * .{keyCode|keyAlias} -->只当事件是从特定键触发时才触发回调
+  * .native -->监听组件根元素的原声事件
+  * .once -->只触发一次回调
+  *
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      counter: 0
+    },
+    methods: {
+      increment(){
+        this.counter++
+      },
+      decrement(){
+        this.counter--
+      },
+      btn1Click(){
+        console.log("btn1Click");
+      },
+      btn2Click(abc){
+        console.log("btn2Click");
+      },
+      btn3Click(abc, event){
+        console.log(abc);
+        console.log(event);
+      },
+      btnClick(){
+        console.log("btnClick");
+      },
+      divClick(){
+        console.log("divClick");
+      },
+      submitClick(){
+        console.log("submitClick");
+      },
+      keyUp(){
+        console.log("keyUp");
+      },
+      btn4Click(){
+        console.log("btn4Click");
+      }
+    }
+  })
+</script>
+</body>
+</html>

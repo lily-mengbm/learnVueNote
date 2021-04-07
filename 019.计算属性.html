@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>计算属性</title>
+</head>
+<body>
+<div id="app">
+  <h2>{{firstName + " " + lastName}}</h2>
+  <h2>{{firstName}} {{lastName}}</h2>
+  <h2>{{getFullName()}}</h2>
+  <h2>{{fullName}}</h2>
+  <h2>--------------------------</h2>
+  <h2>总价格：{{totalPrice}}</h2>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 我们知道，在模板中可以直接通过插值语法显示一些data中的数据，
+  * 但是在某些情况下，我们可能需要对数据进行一些转化后再显示，或者需要将多个数据结合起来进行显示
+  * 这中情况下可以使用计算属性，计算属性写在实例中的computed选项中
+  * 计算属性中的命名一般以属性的形式，fullName而不是getFullName，而且不用加（）调用
+  * 计算属性只会调用一次，性能更高
+  *
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      firstName: "Lebron",
+      lastName: "James",
+      books: [
+        {id: 100, name: 'JS编程艺术', price: 89},
+        {id: 100, name: '深入理解计算机原理', price: 89},
+        {id: 300, name: '现代操作系统', price: 99},
+        {id: 400, name: 'JS编程艺术', price: 120},
+      ]
+    },
+    methods: {
+      getFullName: function () {
+        return this.firstName + " " + this.lastName
+      }
+    },
+    computed: {
+      fullName: function () {
+        return this.firstName + " " + this.lastName
+      },
+      totalPrice: function () {
+        let result = 0
+        for(let i=0; i<this.books.length; i++){
+          result += this.books[i].price
+        }
+        return result
+      }
+    }
+  })
+</script>
+</body>
+</html>

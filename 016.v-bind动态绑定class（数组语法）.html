@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind</title>
+</head>
+<body>
+<div id="app">
+  <h2 class="title" :class="[active, line]">{{message}}</h2>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 数组语法：class后面跟的是一个数组
+  * 用法一：直接通过[]绑定一个类
+  * 用法二：传入多个值
+  * 用法三：和普通类同时存在，并不冲突
+  * 用法四：放在computed或者methods中
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template",
+      active: 'aaa',
+      line: 'bbb'
+    }
+  })
+</script>
+</body>
+</html>

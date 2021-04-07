@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>生命周期</title>
+</head>
+<body>
+  <!--生命周期：事物从诞生到死亡的整个过程
+      Vue生命周期(钩子函数hook)：created
+  -->
+</body>
+<script src="vue.js"></script>
+<script>
+  const app = new Vue({
+    el:"#app",
+    data:{},
+    methods:{},
+    beforeMount: function(){
+      console.log("beforeMount")
+    },
+    created: function () {
+      console.log("created")
+    },
+    mounted: function () {
+      console.log("mounted")
+    }
+  })
+</script>
+</html>

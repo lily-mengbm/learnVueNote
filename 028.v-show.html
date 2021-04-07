@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-show</title>
+</head>
+<body>
+<div id="app">
+  <h2 v-if="isShow" id="aaa">{{message}}</h2>
+  <h2 v-show="isShow" id="bbb">{{message}}</h2>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * v-show和v-if非常相似，也用于决定一个元素是否渲染
+  * v-if和v-show对比：
+  * v-if当条件为false时，不会有相应的元素在DOM中
+  * v-show当条件为false时，将元素的display属性设置为none
+  * 在开发中，当需要在显示与隐藏中频繁切换时，使用v-show，否则使用v-if
+  *
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "hello",
+      isShow: false
+    }
+  })
+</script>
+</body>
+</html>

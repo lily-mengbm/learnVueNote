@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>插槽slot</title>
+</head>
+<body>
+<div id="app">
+  <cpn><button>按钮</button></cpn>
+  <cpn><span/>span</cpn>
+  <cpn>
+    <div>div</div>
+    <div>div</div>
+  </cpn>
+  <cpn><span slot="center">被替换的center</span></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>我是组件的标题</h2>
+    <p>我是组件的内容</p>
+    <slot><button>插槽的按钮</button></slot>
+    <slot name="left"><span>左边</span></slot>
+    <slot name="center"><span>中间</span></slot>
+    <slot name="right"><span>右边</span></slot>
+  </div>
+</template>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 为什么使用slot
+  * slot(插槽)：生活中的插槽是可以让原来的设备具有更多的扩展性
+  *            组件的插槽也是为了让我们封装的组件更加具有扩展性
+  * 插槽的基本使用：在组件中定义一个<slot></slot>
+  * <slot>标签内部可以放默认值
+  * 如果组件标签中有多个元素将会全部替换
+  *
+  * 具名slot：当子组件功能复杂的时候，自组件的插槽可能不止一个
+  * 比如我们封装一个导航栏的子组件，可能就需要三个插槽，分别代表左边、中间、右边
+  * 那么在给插槽插入内容的时候，如何区分插入的是哪一个
+  * 这时候就需要给插槽起一个名字
+  * 给slot一个那么属性： <slot name="mylot"></slot>
+  * */
+  const app = new Vue({s
+    el: "#app",
+    data: {
+      message: "template"
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+
+      }
+    }
+  })
+</script>
+</body>
+</html>

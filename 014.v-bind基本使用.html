@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind</title>
+</head>
+<body>
+<div id="app">
+  <img v-bind:src="imgURL" /><br/>
+  <a v-bind:href="aHref">百度一下</a>
+  <!--语法糖写法-->
+  <img :src="imgURL" /><br/>
+  <a :href="aHref">百度一下</a>
+
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * v-bind:动态绑定属性
+  * 简写(语法糖) ：
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      message: "template",
+      imgURL: "https://wx2.sinaimg.cn/mw690/604e48d0ly1ga25phwwgqj20j60iy0u2.jpg",
+      aHref: 'http://www.baidu.com'
+    }
+  })
+</script>
+</body>
+</html>

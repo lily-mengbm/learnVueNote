@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>检测数组更新</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="item in letters">{{item}}</li>
+  </ul>
+  <button @click="btnClick">按钮</button>
+</div>
+<script src="vue.js"></script>
+<script>
+  /*
+  * 因为Vue是响应式的，所以当数据发生变化时，Vue会自动检测到数据变化，视图会发生相应的更新
+  * Vue中包含了一组观察数组编译的方法，使用它们改变数组也会触发视图的更新
+  * push() 在数组最后添加一个或多个元素
+  * pop() 删除数组中最后一个元素
+  * shift() 删除数组中第一个元素
+  * unshift() 在数组最前面添加一个或多个元素
+  * splice() 删除/插入/替换元素
+  *          参数：第一个参数表示开始删除的位置，比如1，就是从索引为1的位置开始
+  *               第二个参数表示删除元素的长度，如果没有传则删除之后所有元素，传0表示插入元素
+  *               第三个参数表示替换元素，可以传多个，以逗号分割
+  * sort() 排序
+  * reverse() 反转
+  * */
+  const app = new Vue({
+    el: "#app",
+    data: {
+      letters: ['a', 'b', 'c', 'd']
+    },
+    methods: {
+      btnClick(){
+        //this.letters.push('e')
+        //this.letters.pop()
+        //this.letters.shift()
+        //this.letters.unshift('f', 'g')
+        //this.letters.splice(2, 3, 'h', 'i')
+        //this.letters.sort()
+        //this.letters.reverse()
+
+        //注意：通过索引值修改数组中的元素不是响应式的，页面不会随着改变
+        //this.letters[0] = 'aaa'
+        //可以通过set方法实现数据响应式 Vue.set(要修改的对象，索引值，修改后的值)
+        Vue.set(this.letters, 0, 'aaa')
+      }
+
+    }
+  });
+  //可变参数，将传入任意长度的参数放在一个数组中
+  function sum (...num){
+    console.log(num);//1 2 3 4
+  };
+  sum(1, 2, 3, 4);
+</script>
+</body>
+</html>
