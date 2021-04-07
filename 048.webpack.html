@@ -11,6 +11,18 @@
     * webpack安装：安装Webpack首选需要安装Node.js,Node自带了软件包管理器npm
     * 查看自己node版本： node -v
     * 全局安装webpack（版本号：3.6.0）:npm install webpack@3.6.0 -g
+    *
+    * 文件和文件夹解析：
+    * dist文件夹：用于存放打包之后的文件
+    * src文件夹：用于存放源文件
+    *   main.js：项目的入口文件
+    * index.html:浏览器打开展示的首页
+    * package.json:通过npm init生成的，npm包管理的文件
+    *
+    * js文件的打包：
+    * webpack打包指令：webpack src/main.js dist/bundle.js
+    * 在项目中使用模块化语法，webpack将会以main.js文件为入口，开始打包，最后输出到bundle.js文件
+    * 最后，我们需要在index.html中引入bundle.js文件，打开index.html就可以在浏览器查看
     * */
   </script>
 </head>
